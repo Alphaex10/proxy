@@ -209,7 +209,7 @@ async function handlePathRequest(req, res) {
   let baseUrlToUse = tempBaseAddr || storedBaseUrl;  // Use temp base only for this request
   let baseStrip = baseUrlToUse.replaceAll("https://", "");
   var path = req.params.path || '';
-  const requestedPath = path;
+  const requestedPath = path.join('/');
   var fullUrl = "https://" + sub + baseStrip + "/" + requestedPath + queryString;
 
   const result = await fetchWebsiteContent(fullUrl, req.method, req.body, req.headers);
