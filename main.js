@@ -231,7 +231,7 @@ function createApp() {
   app.use(express.raw({ type: '*/*', limit: '50mb' }));
 
   app.all('/', handleSetBaseUrl);
-  app.all('/*', handlePathRequest);
+  app.all('/*path', handlePathRequest);
 
   return app;
 }
