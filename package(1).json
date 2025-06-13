@@ -1,0 +1,20 @@
+{
+  "name": "interconnect",
+  "version": "1.0.0",
+  "description": "interconnect",
+  "main": "index.js",
+  "repository": "https://github.com/101Corp/interconnect_backend/",
+  "author": "101Corp",
+  "license": "",
+  "private": false,
+  "scripts": {
+    "start": "node index.js"
+  },
+   "dependencies": {
+    "bcrypt": "^5.1.0",
+    "pg": "^8.11.1"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}
