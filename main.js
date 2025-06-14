@@ -44,7 +44,7 @@ async function fetchWebsiteContent(url, method = 'GET', body = null, originalHea
     headers["origin"] = parsedBase.origin
     headers["referer"] = parsedBase.origin
     headers["Alt-Used"] = parsedBase.origin
-    console.log(headers["urlClassification"])
+    console.log(headers)
     currentHost = headers["host"]
     delete headers["host"]
     //delete headers["x-forwarded-for"]
