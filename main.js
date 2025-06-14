@@ -43,7 +43,8 @@ async function fetchWebsiteContent(url, method = 'GET', body = null, originalHea
     const headers = originalHeaders || {};
     headers["origin"] = parsedBase.origin
     headers["referer"] = parsedBase.origin
-
+    headers["Alt-Used"] = parsedBase.origin
+    console.log(headers["urlClassification"])
     currentHost = headers["host"]
     delete headers["host"]
     //delete headers["x-forwarded-for"]
@@ -55,7 +56,7 @@ async function fetchWebsiteContent(url, method = 'GET', body = null, originalHea
       data: body,
       responseType: 'arraybuffer',
       maxRedirects: 5,
-      timeout: 30000,
+      timeout: 30,
       httpsAgent: insecureAgent,
       validateStatus: null, // let us see non-2xx statuses
     };
@@ -204,7 +205,7 @@ async function handleSetBaseUrl(req, res) {
 
 async function handlePathRequest(req, res) {
   if (!storedBaseUrl) {
-    return res.status(400).send(`<h1>No Base URL Set</h1><p>Visit /?url=https://example.com first.</p>`);
+    return res.status(400).send(`<h1>No Base URL Set</h1><p>Visit /?repl_url=https://example.com first.</p>`);
   }
 
   let { queryString, sub, tempBaseAddr } = checkForQuery(req);
@@ -228,9 +229,9 @@ async function handlePathRequest(req, res) {
 
 function createApp() {
   const app = express();
-  app.use(express.json({ limit: '50mb' }));
-  app.use(express.urlencoded({ extended: true, limit: '50mb' }));
-  app.use(express.raw({ type: '*/*', limit: '50mb' }));
+  app.use(express.json({ limit: '150mb' }));
+  app.use(express.urlencoded({ extended: true, limit: '150mb' }));
+  app.use(express.raw({ type: '*/*', limit: '150mb' }));
 
   app.set('trust proxy', true);
   app.all('/', handleSetBaseUrl);
