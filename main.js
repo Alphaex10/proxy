@@ -56,7 +56,7 @@ async function fetchWebsiteContent(url, method = 'GET', body = null, originalHea
       data: body,
       responseType: 'arraybuffer',
       maxRedirects: 5,
-      timeout: 30,
+      timeout: 3000,
       httpsAgent: insecureAgent,
       validateStatus: null, // let us see non-2xx statuses
     };
