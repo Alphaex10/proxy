@@ -98,7 +98,9 @@ async function fetchWebsiteContent(url, method = 'GET', body = null, originalHea
 
 function basicNetFetch(req, res, result, base) {
   const contentType = result.contentType;
-  const proxyHost = `${req.protocol}://${currentHost}`;
+  const protocol = req.secure ? 'https' : 'https';
+  const proxyHost = `${protocol}://${currentHost}`;
+
   const baseOrigin = base.origin.replaceAll("https://", "");
 
   res.set('Content-Type', contentType);
@@ -230,6 +232,7 @@ function createApp() {
   app.use(express.urlencoded({ extended: true, limit: '50mb' }));
   app.use(express.raw({ type: '*/*', limit: '50mb' }));
 
+  app.set('trust proxy', true);
   app.all('/', handleSetBaseUrl);
   app.all('/*path', handlePathRequest);
 
